@@ -5,21 +5,28 @@ function DataStream() {
   return {
     getMeta: function() {},
     getLastSnapshot: function() {},
-    getDataStream: function() {
+    getDataStream: function(evtSource) {
       var responseStream = Rx.Observable.create(function(observer) {
-        var cnt = 0;
-        setInterval(function() {
-          cnt++;
-          var dataSnapshotSample = {
-            timestamp: new Date(),
-            columns: ['Toronto', 'New York', 'Kiev'],
-            data: [
-              [randomGenerator(), randomGenerator(), randomGenerator()],
-              [0, 2, 0]
-            ]
-          };
-          observer.onNext(dataSnapshotSample);
-        }, 2000);
+        /*        var cnt = 0;
+                setInterval(function() {
+                  cnt++;
+                  var dataSnapshotSample = {
+                    timestamp: new Date(),
+                    columns: ['Toronto', 'New York', 'Kiev'],
+                    data: [
+                      [randomGenerator(), randomGenerator(), randomGenerator()],
+                      [0, 2, 0]
+                    ]
+                  };
+                  observer.onNext(dataSnapshotSample);
+                }, 2000);*/
+
+        // Get events from the server
+        evtSource.onmessage = function(e) {
+          console.log("message: " + e.data);
+          observer.onNext(e.data);
+        }
+
       });
       return responseStream;
     }
@@ -48,7 +55,9 @@ var dataSnapshotSample = {
 
 function usageSample() {
   var dataStream = new DataStream();
-  var stream = dataStream.getDataStream();
+  // Replace the URL to our Server URl
+  var evtSource = new EventSource("Provided URL");
+  var stream = dataStream.getDataStream(evtSource);
   stream.subscribe(function(dataSnapshot) {
     console.log("dataSnapshot: ");
     console.log(dataSnapshot);
