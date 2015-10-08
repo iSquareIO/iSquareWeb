@@ -43,6 +43,7 @@ function usageSample() {
   stream.subscribe(function(dataSnapshot) {
     console.log("dataSnapshot: ");
     console.log(dataSnapshot);
+    console.log(JSON.stringify(dataSnapshot));
   });
 }
 
