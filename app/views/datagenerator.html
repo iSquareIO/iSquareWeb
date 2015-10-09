@@ -1,0 +1,7 @@
+
+<div class="row" ng-repeat="col in datagenerator.data">
+  <div class="col-md-2">{{col.city}}</div>
+  <div class="col-md-2">{{col.value}}</div>
+  <div class="col-md-2"><input type="range" ng-model="col.value" ng-change="datagenerator.changed()"/></div>
+
+</div>

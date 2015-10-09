@@ -29,6 +29,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/datagenerator', {
+        templateUrl: 'views/datagenerator.html',
+        controller: 'DatageneratorCtrl',
+        controllerAs: 'datagenerator'
+      })
       .otherwise({
         redirectTo: '/'
       });
