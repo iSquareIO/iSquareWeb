@@ -75,11 +75,31 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      server: {
+        options: {
+          port: 9000,
+          hostname: 'localhost'
+        },
+        proxies: [
+          {
+            context: '/datareceiver',
+            host: '127.0.0.1',
+            port: 8080,
+            https: false,
+            xforward: false,
+            headers: {
+              "x-custom-added-header": 'value'
+            },
+            hideHeaders: ['x-removed-header']
+          }
+        ]
+      },
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
-            return [
+          middleware: function (connect, options) {
+            var middlewares = [
+              require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -91,6 +111,7 @@ module.exports = function (grunt) {
               ),
               connect.static(appConfig.app)
             ];
+            return middlewares;
           }
         }
       },
@@ -408,6 +429,8 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-connect-proxy');
+  console.log("---loaded");
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -419,6 +442,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);
