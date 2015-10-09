@@ -9,16 +9,7 @@
  */
 angular.module('iSquareWebApp')
   .factory('dataStream', function () {
-    // Service logic
-    // ...
-
-    var meaningOfLife = 42;
-
-    // Public API here
     return {
-      someMethod: function () {
-        return meaningOfLife;
-      },
       getDataStream: function(url) {
         var eventSource = new EventSource(url);
         console.log("eventSource: "+eventSource);
