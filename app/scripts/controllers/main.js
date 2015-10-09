@@ -8,10 +8,18 @@
  * Controller of the iSquareWebApp
  */
 angular.module('iSquareWebApp')
-  .controller('MainCtrl', function () {
+  .controller('MainCtrl', ['dataStream', function (dataStream) {
+
+    var stream = dataStream.getDataStream('sse');
+    stream.subscribe(function(dataSnapshot) {
+      console.log("dataSnapshot: ");
+      console.log(dataSnapshot);
+      console.log(JSON.stringify(dataSnapshot));
+    });
+
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });
+  }]);

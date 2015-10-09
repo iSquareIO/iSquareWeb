@@ -20,7 +20,16 @@ angular.module('iSquareWebApp')
 
     this.changed = function() {
       console.log("Data is changed");
-      $http.post('datareceiver', this.data);
+      var data = this.data;
+      var snapshot = {
+        timestamp: new Date(),
+        columns: data.map(function(c) {return c.city}),
+        data: [
+          data.map(function(c) {return c.value}),
+          data.map(function(c) {return c.value > 90 ? 1 : 0})
+        ]
+      };
+      $http.post('datareceiver', snapshot);
     };
 
     this.awesomeThings = [

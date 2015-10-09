@@ -87,11 +87,15 @@ module.exports = function (grunt) {
             port: 8080,
             https: false,
             xforward: false,
-            headers: {
-              "x-custom-added-header": 'value'
-            },
-            hideHeaders: ['x-removed-header']
+          },
+          {
+            context: '/sse',
+            host: '127.0.0.1',
+            port: 8080,
+            https: false,
+            xforward: false,
           }
+
         ]
       },
       livereload: {
