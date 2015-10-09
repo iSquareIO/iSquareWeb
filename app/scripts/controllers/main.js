@@ -24,7 +24,7 @@ angular.module('iSquareWebApp')
             city: data.columns[i],
             value: data.data[0][i],
             alert: data.data[1][i],
-            alertType: data.data[1][i] == 1 ? 'danger' : ''
+            alertType: data.data[1][i] === 1 ? 'danger' : ''
           });
         }
         self.table = table;
