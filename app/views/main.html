@@ -4,8 +4,10 @@
     {{main.data.timestamp}}
     <div class="row" ng-repeat="col in main.table">
       <div class="col-md-2">{{col.city}}</div>
-      <div class="col-md-2">{{col.value}}</div>
-      <div class="col-md-2">{{col.alert}}</div>
+      <div class="col-md-4">
+        <progressbar max="100" value="col.value" type="{{col.alertType}}"><span style="color:white; white-space:nowrap;">{{col.value}}</span></progressbar>
+      </div>
+      <div class="col-md-2">{{col.alert == 1 ? 'Alert !':''}}</div>
     </div>
   </div>
 

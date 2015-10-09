@@ -26,7 +26,7 @@ angular.module('iSquareWebApp')
         columns: data.map(function(c) {return c.city;}),
         data: [
           data.map(function(c) {return c.value;}),
-          data.map(function(c) {return c.value > 90 ? 1 : 0;})
+          data.map(function(c) {return c.value > 80 ? 1 : 0;})
         ]
       };
       $http.post('datareceiver', snapshot);
