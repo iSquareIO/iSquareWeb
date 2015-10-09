@@ -15,7 +15,7 @@ angular.module('iSquareWebApp')
       return {
         city: city,
         value: 0
-      }
+      };
     });
 
     this.changed = function() {

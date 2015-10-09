@@ -97,7 +97,7 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function (connect, options) {
+          middleware: function (connect) {
             var middlewares = [
               require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
@@ -430,7 +430,6 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks('grunt-connect-proxy');
-  console.log("---loaded");
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
