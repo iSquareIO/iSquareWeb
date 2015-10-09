@@ -28,9 +28,9 @@ angular.module('iSquareWebApp')
           eventSource.onmessage = function(e) {
             console.log("message: " + e.data);
             observer.onNext(e.data);
-          }
+          };
         });
         return responseStream;
       }
-    }
+    };
   });
